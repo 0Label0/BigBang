@@ -1,6 +1,6 @@
 ---
 import Header from '../components/layout-components/header.astro';
-import Footer from '../components/layout-components/footer.astro';
+
 interface Props {
 	title: string;
 }
@@ -22,7 +22,6 @@ const { title } = Astro.props;
 	<body>
 		<Header title='Big Bang'></Header>
 		<slot />
-		<Footer></Footer>
 	</body>
 </html>
 

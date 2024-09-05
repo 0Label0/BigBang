@@ -1,0 +1,80 @@
+.drinks-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.drinks {
+  position: relative;
+  left: 25%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;  
+  gap: 30px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  border: white 2px solid;
+  border-radius: 5px;
+  width: 50%;
+  height: auto;
+
+
+}
+.container {
+  position: fixed;
+  top: 86vh;
+  left: 50%;
+  transform: translateX(-50%); 
+  z-index: 1000; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-b{
+  padding: 5px;
+  height: 100%;
+  width: 100%;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  text-shadow: 1px 1px 10px #ddd;
+  cursor: pointer;
+  border: none;
+}
+.btn-b:hover {
+  background-color: #333;
+}
+
+.btn-a {
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 3px;
+  margin-bottom: 10px;
+  height: 35px;
+  margin-top: 5px;
+}
+
+.btn-a:hover {
+  background-color: #333;
+  transform: scale(1.05);
+
+}
+
+.btn-section-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import '../../styles/nav.css'
+import './nav.css';
 
 
 const NavBar = ():JSX.Element => {
@@ -26,8 +26,8 @@ const NavBar = ():JSX.Element => {
       </div>
       <nav>
         <ul className={navToggle ? "links" : "links-hidden"}>
-          <li className="link-container"><a href="../components/Layout.astro" className="link">Cerveza</a></li>
-          <li className="link-container"><a href="" className="link">Vino</a></li>
+          <li className="link-container"><a href="/admin" className="link">adim</a></li>
+          <li className="link-container"><a href="/" className="link">index</a></li>
           <li className="link-container"><a href="" className="link">Cubata</a></li>
           <li className="link-container"><a href="" className="link">Especiales</a></li>
         </ul>
