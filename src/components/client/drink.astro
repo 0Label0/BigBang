@@ -1,0 +1,55 @@
+---
+
+
+interface Props {
+  drinkName: string,
+  drinkPrice: string | number,
+  drinkDescription?: string,
+}
+
+const { drinkName, drinkPrice, drinkDescription } = Astro.props
+---
+
+<div class="drink">
+  <div class="box reveal">
+    <p class="name">{drinkName}</p>
+    <p class="price">{drinkPrice}€</p>
+    
+  </div>
+  <p class="description reveal">{drinkDescription}</p>
+  
+</div>
+
+<style>
+  .drink {
+    display: flex;
+    flex-direction: column;
+    color: aliceblue;
+    width: 100%;
+  }
+
+  .drink > p {
+    color: rgb(59, 112, 182);
+    font-size: 1.2em;
+
+  }
+
+  .box {
+    display: flex;
+    justify-content: space-between;
+  }
+  .box p {
+    font-size: 2em;
+  }
+
+	@media (max-width: 768px) {
+		.box p {
+      font-size: 1.6em;
+    }
+    .drink > p {
+      font-size: 1.1em;
+    }
+
+	}
+</style>
+

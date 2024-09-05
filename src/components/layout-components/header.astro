@@ -1,0 +1,51 @@
+---
+import NavBar from './navBar';
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props;
+---
+
+<header>
+  <nav>
+    <NavBar client:load/>
+  </nav>
+  <div class="box">
+    <h1 >{title}</h1>
+  </div>
+  
+</header>
+
+
+<style>
+
+:root {
+  --text-color: 230, 243, 245;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+header h1 {
+  color: rgb(var(--text-color));
+  font-size: 5em;
+}
+
+nav {
+  position: fixed;
+  left: 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+  }
+
+}
+</style>

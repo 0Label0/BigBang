@@ -1,0 +1,35 @@
+---
+import Drink from "./drink.astro";
+const { sectionName } = Astro.props
+---
+<div class="drinks">
+  <ul class={sectionName}>
+    <li><Drink drinkName="cerveza" drinkPrice={"2,50"}></Drink></li>
+    <li><Drink drinkName="cubata" drinkPrice={"3,50"}></Drink></li>
+    <li><Drink drinkName="Sex on the beach" drinkPrice={"5,50"} drinkDescription='(Limón, aguacate, salmon)'></Drink></li>
+    <li><Drink drinkName="vino" drinkPrice={"2,10"}></Drink></li>
+    <li><Drink drinkName="tercio" drinkPrice={"1,50"}></Drink></li>
+  </ul>
+</div>
+
+
+
+<style>
+
+  .drinks {
+    width: 50%;
+  }
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .drinks {
+      width: 95%;
+    }
+	}
+
+</style>
