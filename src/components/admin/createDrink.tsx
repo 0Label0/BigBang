@@ -1,23 +1,15 @@
-import type { TypeCreateDrink } from "./types";
-import { useLocalStorage } from "./useLocalStorage";
-import './createDrink.css';
+import type { TypeCreateDrink } from "./types"
+import './createDrink.css'
+import { useState } from "react"
 
 function CreateDrink({ description, id, onDelete }:TypeCreateDrink):JSX.Element {
 
-  const DRINK_NAME = `drinkName_${id}`;
-  const PRICE = `price_${id})`;
-  const DESCRIPTION = `description_input_${id}`;
-
-  const [drinkName, setDrinkName] = useLocalStorage(DRINK_NAME, '');
-  const [price, setPrice] = useLocalStorage(PRICE, '');
-  const [descriptionInput, setDescriptionInput] = useLocalStorage(DESCRIPTION, '');
+  const [drinkName, setDrinkName] = useState<string>('')
+  const [price, setPrice] = useState<string>('')
+  const [descriptionInput, setDescriptionInput] = useState<string>('')
 
   const removeItem = () :void => {
-    localStorage.removeItem(DRINK_NAME);
-    localStorage.removeItem(PRICE);
-    localStorage.removeItem(DESCRIPTION);
-
-    onDelete(id);
+    onDelete(id)
   }
 
   return (
@@ -36,7 +28,7 @@ function CreateDrink({ description, id, onDelete }:TypeCreateDrink):JSX.Element 
 
       <button className="erase" onClick={removeItem}>Borrar</button>
     </div>
-  );
+  )
 }
 
-export default CreateDrink;
+export default CreateDrink
