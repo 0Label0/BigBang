@@ -1,5 +1,6 @@
 import CreateDrink from "./createDrink";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useLocalStorage } from "./useLocalStorage";
 import type { TypeDrink, TypeSection } from "./types";
 import './createCard.css';
@@ -9,8 +10,7 @@ function CreateCard():JSX.Element {
   const [description, setDescription] = useState<boolean>(false);
   const [drinks, setDrinks] = useLocalStorage('drinks', []);
   const [sections, setSections] = useLocalStorage(`section`,[]);
-
- 
+  const { register, handleSubmit } = useForm()
 
   const addDrink = (sectionId: string): void => {
     const id = `${Date.now()}`
@@ -51,9 +51,10 @@ function CreateCard():JSX.Element {
     localStorage.setItem('sections', JSON.stringify(updateSections))
   };
 
+
   return(
     <>
-      <div className="drinks-container">
+      <form className="drinks-container">
         <div>
           {
             sections.map((section: TypeSection)=> {
@@ -80,7 +81,7 @@ function CreateCard():JSX.Element {
                   </ul>
                   
                 </section>
-              );
+              )
 
             })
           }
@@ -90,10 +91,11 @@ function CreateCard():JSX.Element {
           <div className="btn-container">
             <button className="btn-b" onClick={toggleDescription}>{description ? <span>Con descripción</span> : <span>Sin descripción</span>}</button>
             <button className="btn-b" onClick={addSection}><span>Añadir sección</span></button>
+            <button className="btn-b" type="submit">Guardar datos</button>
           </div>
         </div>
     
-      </div>
+      </form>
     </>
   );
 }

@@ -4,15 +4,15 @@ import './createDrink.css';
 
 function CreateDrink({ description, id, onDelete }:TypeCreateDrink):JSX.Element {
 
-  const DRINK_NAME = `drinkName_${id}`
-  const PRICE = `price_${id})`
-  const DESCRIPTION = `description_input_${id}`
+  const DRINK_NAME = `drinkName_${id}`;
+  const PRICE = `price_${id})`;
+  const DESCRIPTION = `description_input_${id}`;
 
   const [drinkName, setDrinkName] = useLocalStorage(DRINK_NAME, '');
   const [price, setPrice] = useLocalStorage(PRICE, '');
   const [descriptionInput, setDescriptionInput] = useLocalStorage(DESCRIPTION, '');
 
-  const removeItem = ():void => {
+  const removeItem = () :void => {
     localStorage.removeItem(DRINK_NAME);
     localStorage.removeItem(PRICE);
     localStorage.removeItem(DESCRIPTION);
