@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import type { TypeDrink, TypeSection } from "./types"
 import './createCard.css'
-import { POST } from "astro/actions/runtime/route.js"
 
 function CreateCard():JSX.Element {
 
