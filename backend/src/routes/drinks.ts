@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
+import { Drink } from '../types' 
 
-const drinkSchema = new Schema({
+const dinkSchema: Schema = new Schema({
   name: {
     type:String,
     required: true,
@@ -15,9 +16,14 @@ const drinkSchema = new Schema({
     type: String,
     required: false,
     trim: true
+  },
+  section_id: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Section',
+    required: true
   }
 }, {
   timestamps: true
 })
 
-export default model('Drink', drinkSchema)
+export default model<Drink>('Drink', dinkSchema)
