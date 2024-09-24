@@ -9,8 +9,7 @@ const dinkSchema: Schema = new Schema({
   },
   price: {
     type: Number,
-    required: true,
-    trim: true
+    required: true
   },
   description: {
     type: String,

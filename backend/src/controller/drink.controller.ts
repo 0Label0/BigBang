@@ -1,10 +1,10 @@
 import {RequestHandler} from 'express'
-import Drink from './drinks'
+import Drink from '../model/drink'
 
 export const createDrink:RequestHandler = (req, res) => {
   const drink = new Drink(req.body)
   console.log(drink)
-  res.json()
+  res.json('bien hecho')
 }
 
 export const getDrinks:RequestHandler = (req, res) => {

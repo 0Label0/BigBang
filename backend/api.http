@@ -13,11 +13,11 @@ POST {{api}}/drinks
 Content-Type: application/json
 
 {
-  "section": "Cervezas",
   "name": "tercio",
   "price":4.50,
-  "description": "Esto es una bebida alcoholica"
-}
+  "description": "Esto es una bebida"
+},
+
 
 ###
 
