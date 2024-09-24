@@ -1,28 +1,34 @@
 
 @api =http://localhost:1234
+@drinks = /sections/drinks
 
-GET {{api}}/drinks
-
-###
-
-GET {{api}}/drinks/1 HTTP/1.1
+### DRINKS
+GET {{api}}{{drinks}}
 
 ###
 
-POST {{api}}/drinks
+GET {{api}}{{drinks}}/1
+
+###
+
+POST {{api}}{{drinks}}
 Content-Type: application/json
 
 {
   "name": "tercio",
   "price":4.50,
   "description": "Esto es una bebida"
-},
-
-
-###
-
-DELETE {{api}}/drinks/1
+}
 
 ###
 
-PUT {{api}}/drinks/1
+DELETE {{api}}{{drinks}}/1
+
+###
+
+PUT {{api}}{{drinks}}/1
+
+
+### SECTIONS
+
+GET {{api}}/sections
