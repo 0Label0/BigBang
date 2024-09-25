@@ -11,3 +11,9 @@ export interface Drink extends Document {
   desctiption: string,
   section_id: mongoose.Schema.ObjectId
 }
+
+export interface Admin extends Document {
+  name: String,
+  mail: String,
+  password: String
+}

@@ -17,7 +17,8 @@ Content-Type: application/json
 {
   "name": "tercio",
   "price":4.50,
-  "description": "Esto es una bebida"
+  "description": "Esto es una bebida",
+  "section_id": "60d5ec49f9b55e31b3c5a128"
 }
 
 ###
@@ -32,3 +33,9 @@ PUT {{api}}{{drinks}}/1
 ### SECTIONS
 
 GET {{api}}/sections
+
+
+
+### ADMIN
+
+GET {{api}}/admin

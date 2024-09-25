@@ -1,10 +1,15 @@
 import {RequestHandler} from 'express'
 import Drink from '../model/drink'
 
-export const createDrink: RequestHandler = (req, res) => {
-  const drink = new Drink(req.body)
-  console.log(drink)
-  res.json('bien hecho')
+export const createDrink: RequestHandler = async (req, res) => {
+  try {
+    const drink = new Drink(req.body)
+    const savedDrink = await drink.save()
+    res.json(savedDrink)
+  }catch(err) {
+    res.json(err)
+  }
+ 
 }
 
 export const getDrinks: RequestHandler = (req, res) => {
