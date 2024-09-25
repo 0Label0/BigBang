@@ -7,7 +7,7 @@ GET {{api}}{{drinks}}
 
 ###
 
-GET {{api}}{{drinks}}/1
+GET {{api}}{{drinks}}/66f3c7cc25c26bf9eca9b3c4
 
 ###
 
@@ -15,10 +15,10 @@ POST {{api}}{{drinks}}
 Content-Type: application/json
 
 {
-  "name": "tercio",
+  "name": "Tercio",
   "price":4.50,
   "description": "Esto es una bebida",
-  "section_id": "60d5ec49f9b55e31b3c5a128"
+  "section_id": "66f3ee3ccad48f27b193124b"
 }
 
 ###
@@ -27,15 +27,38 @@ DELETE {{api}}{{drinks}}/1
 
 ###
 
-PUT {{api}}{{drinks}}/1
+PUT {{api}}{{drinks}}/66f3c7cc25c26bf9eca9b3c4
+Content-Type: application/json
 
+{
+  "name":"Salamanca"
+}
 
 ### SECTIONS
 
 GET {{api}}/sections
 
+###
+POST {{api}}/sections
+Content-Type: application/json
 
+{
+  "name": "Vinos",
+  "position": 1
+}
 
 ### ADMIN
 
 GET {{api}}/admin
+
+
+### 
+
+POST {{api}}/admin
+Content-Type: application/json
+
+{
+  "name": "vinos",
+  "password": "1234contraseñasupersegura",
+  "mail": "holamundo@gmail.com",
+}
