@@ -1,10 +1,11 @@
 import { Document } from "mongoose"
 
-export interface Section extends Document {
-  name: string,
-  position: number
+interface Section extends Document {
+  title: string,
 }
-
+export interface SectionArray {
+  sections: [Section]
+}
 export interface Drink extends Document {
   name: string,
   price: number,

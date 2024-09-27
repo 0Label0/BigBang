@@ -1,6 +1,6 @@
-import type { TypeCreateDrink } from "./types"
-import './createDrink.css'
+import type { TypeCreateDrink } from "../../types"
 import { useState } from "react"
+import '../../styles/createDrink.css'
 
 function CreateDrink({ description, id, onDelete }:TypeCreateDrink):JSX.Element {
 
@@ -17,7 +17,7 @@ function CreateDrink({ description, id, onDelete }:TypeCreateDrink):JSX.Element 
       <div className="drink">
         <div className="box reveal">
           <input type="text" className="name" placeholder="bebida" value={drinkName} onChange={(e)=>setDrinkName(e.target.value)}/>
-          <input type="text" className="price"  placeholder="0,00€" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+          <input type="number" className="price"  placeholder="0,00€" value={price} onChange={(e)=>setPrice(e.target.value)}/>
           
         </div>
         {

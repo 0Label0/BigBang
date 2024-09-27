@@ -43,10 +43,10 @@ POST {{api}}/sections
 Content-Type: application/json
 
 {
-  "name": "Vinos",
-  "position": 1
+  "title": "Vinos"
 }
-
+###
+DELETE {{api}}/sections
 ### ADMIN
 
 GET {{api}}/admin

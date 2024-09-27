@@ -1,17 +1,30 @@
 import CreateDrink from "./createDrink"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import type { TypeDrink, TypeSection } from "./types"
-import './createCard.css'
+import { useState, useEffect } from "react"
+import { useForm, useFieldArray } from "react-hook-form"
+import type { FieldValues } from "react-hook-form"
+import type { TypeDrink, FormValues } from "../../types"
+import { sectionsArray } from "../../api/sectionServices"
+import getData from "../../api/getData"
+import '../../styles/createCard.css'
 
 function CreateCard():JSX.Element {
-
   const [description, setDescription] = useState<boolean>(false)
   const [drinks, setDrinks] = useState<TypeDrink[]>([])
-  const [sections, setSections] = useState<TypeSection[]>([])
-  const { register, handleSubmit } = useForm()
 
-  const addDrink = (sectionId: string): void => {
+  // Controladores del formulario
+  const { register, handleSubmit, control, reset } = useForm<FormValues>({
+    defaultValues: {
+      sections: []
+    }
+  })
+
+  // Configuración de useFieldArray
+  const { fields, append, remove } = useFieldArray({
+    name: "sections",
+    control
+  })
+  
+  const addDrink = (sectionId: number): void => {
     const id = `${Date.now()}`
     setDrinks(
       [...drinks, { id, description, sectionId }]
@@ -25,44 +38,23 @@ function CreateCard():JSX.Element {
 
   const toggleDescription = (): void => {
     setDescription(!description)
-
   }
 
   const addSection = (): void => {
-    const id = `${Date.now()}`
-    const title = 'new_section'
-    setSections(
-      [...sections, { id, title }]
-    )
+    append({ title:"new-section", id: `${Date.now()}` })
   }
 
-  const handleSectionTitleChange = (id: string, newTitle: string) => {
-    const updatedSections = sections.map((section: TypeSection) => 
-      section.id === id ? { ...section, title: newTitle } : section
-    )
-    
-    setSections(updatedSections)
-  }
-
-  const eraseSection = (id: string) => {
-    const updateSections: TypeSection[] = sections.filter((section: TypeSection) => section.id !== id)
-    setSections(updateSections)
-  }
-
-  const onSubmitForm = async (dta:any) => {
-    try {
-      const res = await fetch('/api/bebidas', {
-        method: 'POST',
-        body: dta
+  useEffect(()=> {
+    (async()=> {
+      const savedSection = await getData('/sections')
+      reset({
+        sections: savedSection || []
       })
-      if (!res.ok) {
-        throw new Error('Error en la respuesta del servidor')
-      }
-      const data = await res.json()
-      console.log(data)
-    } catch(err) {
-      console.log('Error en el envío de datos', err)
-    }   
+    })()
+  }, [reset])
+
+  const onSubmitForm = async (data: FieldValues): Promise<void> => {
+    await sectionsArray(data)
   }
 
   return(
@@ -70,22 +62,27 @@ function CreateCard():JSX.Element {
       <form onSubmit={handleSubmit(onSubmitForm)} className="drinks-container">
         <div>
           {
-            sections.map((section: TypeSection)=> {
+            fields.map((section, index)=> {
               return(
-                <section key={section.id} style={{marginBottom:"200px"}}>
-                  <input {...register(section.id)} type="text" style={{fontSize:"2em", color:"#fff",textAlign:"center"}} value={section.title} onChange={(e)=>handleSectionTitleChange(section.id, e.target.value)}/>
+                <section key={index} style={{marginBottom:"200px"}}>
+                  <input
+                    {...register(`sections.${index}.title`)}
+                    type="text"
+                    style={{ fontSize: "2em", color: "#fff", textAlign: "center" }}
+                    defaultValue={section.title} // Usa defaultValue en lugar de value
+                  />
                   <div className="btn-section-container">
-                    <button className="erase" onClick={()=>eraseSection(section.id)}>Eliminar sección</button>
-                    <button className="btn-a" onClick={()=>addDrink(section.id)}><span>Añadir bebida</span></button>
+                    <button className="erase" type="button" onClick={()=>remove(index)}>Eliminar sección</button>
+                    <button className="btn-a" type="button" onClick={()=>addDrink(index)}><span>Añadir bebida</span></button>
                   </div>
                   
                   <ul className="drinks">
                     {
                     drinks
-                      .filter((drink:TypeDrink)=> section.id === drink.sectionId)
-                      .map((drink:TypeDrink)=> {
+                      .filter((drink)=> index === drink.sectionId)
+                      .map((drink)=> {
                         return(
-                          <li {...register(drink.id)} key={drink.id}>
+                          <li key={drink.id}>
                               <CreateDrink onDelete={deleteDrink} id={(drink.id + '')} description={drink.description} />
                           </li>
                         )
@@ -102,8 +99,8 @@ function CreateCard():JSX.Element {
 
         <div className="container">
           <div className="btn-container">
-            <button className="btn-b" onClick={toggleDescription}>{description ? <span>Con descripción</span> : <span>Sin descripción</span>}</button>
-            <button className="btn-b" onClick={addSection}><span>Añadir sección</span></button>
+            <button className="btn-b" type="button" onClick={toggleDescription}>{description ? <span>Con descripción</span> : <span>Sin descripción</span>}</button>
+            <button className="btn-b" type="button" onClick={addSection}><span>Añadir sección</span></button>
             <button className="btn-b" type="submit">Guardar datos</button>
           </div>
         </div>

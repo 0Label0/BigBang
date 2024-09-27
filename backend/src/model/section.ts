@@ -2,14 +2,11 @@ import { Schema, model } from "mongoose";
 import { Section } from "../types";
 
 const sectionSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true,
-    trim: true
-  },
-  position: {
-    type: Number,
-    required: true
+    trim: true,
+    unique: true
   }
 
 })

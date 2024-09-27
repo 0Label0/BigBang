@@ -1,5 +1,3 @@
-import type { ZodVoid } from "astro/zod"
-
 export interface TypeCreateDrink {
   description: boolean,
   id:string,
@@ -14,11 +12,14 @@ export interface TypeButtonBottom {
 export type TypeDrink = {
   id: string,
   description: boolean,
-  sectionId: string
+  sectionId: number
 }
 
 export type TypeSection = {
-  id: string,
-  title: string
+  title: string,
+  id: string
 }
 
+interface FormValues {
+  sections: TypeSection[]
+}
