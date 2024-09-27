@@ -13,7 +13,7 @@ export const sectionsArray = async (data: FieldValues): Promise<void> => {
   const processedSections: Array<{ title: string }> = data.sections.map((section: TypeSection) => ({
     title: section.title,
     id: section.id
-  }));
+  }))
 
   try {
     const res = await axios.post(`${api}/sections`, processedSections, {

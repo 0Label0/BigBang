@@ -7,6 +7,12 @@ const sectionSchema = new Schema({
     required: true,
     trim: true,
     unique: true
+  },
+  id: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true
   }
 
 })

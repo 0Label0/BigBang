@@ -24,7 +24,7 @@ export const getSection: RequestHandler = async (req, res) => {
 
 export const createSections: RequestHandler = async (req, res) => {
   try {
-    const sectionValidate = await Section.findOne({ title: req.body.title })
+    const sectionValidate = await Section.findOne({ title: req.body.title, id: req.body.id })
     if (sectionValidate) {
       return res.status(409).json({"Message" : "Section already exist"})
     }
