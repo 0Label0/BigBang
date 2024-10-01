@@ -1,8 +1,7 @@
 import type { FieldValues } from "react-hook-form"
 import type { TypeSection } from '../types'
+import { api } from "../const"
 import axios from "axios"
-
-const api = 'http://localhost:1234'
 
 export const sectionsArray = async (data: FieldValues): Promise<void> => {
 

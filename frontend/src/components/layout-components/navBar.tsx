@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './nav.css';
+import '../../styles/nav.css';
 
 
 const NavBar = ():JSX.Element => {

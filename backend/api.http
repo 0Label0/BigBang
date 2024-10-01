@@ -47,6 +47,10 @@ Content-Type: application/json
 }
 ###
 DELETE {{api}}/sections
+Content-Type: application/json
+
+
+
 ### ADMIN
 
 GET {{api}}/admin

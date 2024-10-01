@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const api = 'http://localhost:1234'
+import { api } from "../const"
 
 // la url debe llevar 'sections' por ejemplo, sin usar '/'
 const getData = async (url: string) => {

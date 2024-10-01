@@ -24,9 +24,9 @@ export const getSection: RequestHandler = async (req, res) => {
 
 export const createSections: RequestHandler = async (req, res) => {
   try {
-    const sectionValidate = await Section.findOne({ title: req.body.title, id: req.body.id })
+    const sectionValidate = await Section.findOne({ title: req.body.title, id: req.body.id });
     if (sectionValidate) {
-      return res.status(409).json({"Message" : "Section already exist"})
+      return res.status(409).json({ "Message": "Section already exist" });
     }
     const sectionsArray = req.body
     if (!Array.isArray(sectionsArray)) {
@@ -41,9 +41,10 @@ export const createSections: RequestHandler = async (req, res) => {
 
     res.status(201).json({ message: 'Secciones han sido creadas con exito', sections: savedSection })
 
-  } catch (err) {
-    console.error('Error al crear la sección:', err)
-    res.status(500).json({ message: 'Error interno del servidor' })
+  }catch (error) {
+
+    res.status(500).send({ message: `Error en el servidor. ${error}` });
+    
   }
 }
 
@@ -63,13 +64,15 @@ export const deleteSection: RequestHandler = async (req, res) => {
   try {
     const deleteSection = await Section.findByIdAndDelete(req.params.id)
     if (!deleteSection) {
-      res.status(404).json(deleteSection)
+      return res.status(404).json(deleteSection)
     }
     res.json(deleteSection)
   }catch(err) {
     res.status(500).json(err)
   }
 }
+
+// Elimina todo
 
 export const deleteAllSections: RequestHandler = async (_, res) => {
   try {

@@ -1,12 +1,14 @@
 import axios from "axios"
+import { api } from "../const"
 
-const api = "http://localhost:"
-
-export const deleteAllData = async (url: string) => {
+const deleteData = async (url: string, id: string): Promise<void> => {
   try {
-    const deleteData = await axios.delete(`${api}/${url}`)
-    console.log("Los datos han sido eliminados", deleteData)
-  }catch(err) {
-    console.log("Error en la eliminación de datos", err)
+    const requestUrl = `${api}/${url}/${id}`;
+    const deleteResponse = await axios.delete(requestUrl)
+    console.log("El dato ha sido eliminado: ", deleteResponse)
+  } catch (err) {
+    console.error("Error en la eliminación de datos: ", err)
   }
 }
+
+export default deleteData

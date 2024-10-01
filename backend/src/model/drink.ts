@@ -17,9 +17,14 @@ const dinkSchema: Schema = new Schema({
     trim: true
   },
   section_id: {
-    type: mongoose.Schema.ObjectId,
+    type: String,
     ref: 'Section',
     required: true
+  },
+  id: {
+    type: String,
+    required: true,
+    trim: true
   }
 }, {
   timestamps: true

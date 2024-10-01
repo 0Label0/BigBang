@@ -12,7 +12,7 @@ export interface TypeButtonBottom {
 export type TypeDrink = {
   id: string,
   description: boolean,
-  sectionId: number
+  sectionId: string
 }
 
 export type TypeSection = {

@@ -17,7 +17,7 @@ export const createDrink: RequestHandler = async (req, res) => {
 }
 
 // Obtener todas las bebidas GET
-export const getDrinks: RequestHandler = async (req, res) => {
+export const getDrinks: RequestHandler = async (_, res) => {
   try {
     const drinks = await Drink.find()
     res.json(drinks)
