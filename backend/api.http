@@ -39,8 +39,22 @@ Content-Type: application/json
 GET {{api}}/sections
 
 ###
+
+PUT {{api}}/sections/66fd3c85c7be1c14d4666cbe
+Content-Type: application/json
+
+{
+  "title": "aaaan"
+}
+
+###
+
 POST {{api}}/sections
 Content-Type: application/json
+
+{
+  "title": "Sección 3"
+}
 
 ###
 DELETE {{api}}/sections

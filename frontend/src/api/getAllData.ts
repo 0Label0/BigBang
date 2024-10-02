@@ -2,7 +2,7 @@ import axios from "axios"
 import { api } from "../const"
 
 // la url debe llevar 'sections' por ejemplo, sin usar '/'
-const getData = async (url: string) => {
+const getAllData = async (url: string) => {
   try {
     const res = await axios.get(`${api}/${url}`)
     if (res) {
@@ -13,4 +13,4 @@ const getData = async (url: string) => {
   }
 }
 
-export default getData
+export default getAllData

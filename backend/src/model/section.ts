@@ -5,8 +5,7 @@ const sectionSchema = new Schema({
   title: {
     type: String,
     required: true,
-    trim: true,
-    unique: true
+    trim: true
   }
 })
 

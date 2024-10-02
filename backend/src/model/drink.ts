@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import { Drink } from '../types' 
 
 const dinkSchema: Schema = new Schema({

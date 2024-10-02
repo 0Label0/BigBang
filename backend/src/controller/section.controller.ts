@@ -24,27 +24,16 @@ export const getSection: RequestHandler = async (req, res) => {
 
 export const createSections: RequestHandler = async (req, res) => {
   try {
-    const sectionValidate = await Section.findOne({ title: req.body.title });
-    if (sectionValidate) {
-      return res.status(409).json({ "Message": "Section already exist" });
+    const sectionProcess = await Section.findOne({title:req.body.title})
+    if (sectionProcess) {
+      return res.status(409).json('Sección duplicada')
     }
-    const sectionsArray = req.body
-    if (!Array.isArray(sectionsArray)) {
-      return res.status(400).json({ message: 'Se esperaba un array de secciones' });
-    }
-    const sectionPromises = sectionsArray.map(async(sectionDta)=> {
-      const section = new Section(sectionDta)
-      return await section.save()
-    })
+    const section = new Section(req.body)
+    await section.save()
+    res.status(200).json(section)
 
-    const savedSection = await Promise.all(sectionPromises)
-
-    res.status(201).json({ message: 'Secciones han sido creadas con exito', sections: savedSection })
-
-  }catch (error) {
-
-    res.status(500).send({ message: `Error en el servidor. ${error}` });
-    
+  } catch (error) {
+    res.status(500).send({ message: `Error en el servidor: ${error}` })
   }
 }
 
@@ -64,7 +53,7 @@ export const deleteSection: RequestHandler = async (req, res) => {
   try {
     const deleteSection = await Section.findByIdAndDelete(req.params.id)
     if (!deleteSection) {
-      return res.status(404).json(deleteSection)
+      return res.status(404).json({ message: "Sección no encontrada" });
     }
     res.json(deleteSection)
   }catch(err) {
