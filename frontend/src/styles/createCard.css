@@ -64,7 +64,25 @@
   height: 35px;
   margin-top: 5px;
 }
+.btn-c {
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  background-color: rgb(255, 255, 255);
+  color: rgb(14, 14, 14);
+  border-radius: 5px;
+  padding: 3px;
+  margin-bottom: 10px;
+  height: 35px;
+  margin-top: 5px;
+}
 
+.btn-c:hover {
+  background-color: #f0eeee;
+  transform: scale(1.05);
+
+}
 .btn-a:hover {
   background-color: #333;
   transform: scale(1.05);

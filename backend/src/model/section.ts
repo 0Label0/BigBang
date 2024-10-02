@@ -7,14 +7,7 @@ const sectionSchema = new Schema({
     required: true,
     trim: true,
     unique: true
-  },
-  id: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true
   }
-
 })
 
 export default model<Section>('Section',sectionSchema)

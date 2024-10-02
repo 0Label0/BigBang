@@ -1,6 +1,6 @@
 export interface TypeCreateDrink {
   description: boolean,
-  id:string,
+  id: string,
   onDelete: (id:string) => void
 }
 
@@ -12,12 +12,12 @@ export interface TypeButtonBottom {
 export type TypeDrink = {
   id: string,
   description: boolean,
-  sectionId: string
+  sectionId: string | undefined 
 }
 
 export type TypeSection = {
   title: string,
-  id: string
+  _id?: string
 }
 
 interface FormValues {

@@ -3,16 +3,19 @@ import type { TypeSection } from '../types'
 import { api } from "../const"
 import axios from "axios"
 
-export const sectionsArray = async (data: FieldValues): Promise<void> => {
+const sectionsArray = async (data: FieldValues): Promise<void> => {
 
   if(!Array.isArray(data.sections)) {
     throw new Error("Secciones no válidas")
   }
 
-  const processedSections: Array<{ title: string }> = data.sections.map((section: TypeSection) => ({
-    title: section.title,
-    id: section.id
-  }))
+  // Procesa las secciones
+  const processedSections: Array<{ title: string }> = data.sections.map((section: TypeSection) => {
+    if (!section.title) {
+      throw new Error("Cada sección debe tener un título válido")
+    }
+    return { title: section.title }
+  })
 
   try {
     const res = await axios.post(`${api}/sections`, processedSections, {
@@ -28,3 +31,5 @@ export const sectionsArray = async (data: FieldValues): Promise<void> => {
     console.log('Error en el envío de datos', err)
   }
 }
+
+export default sectionsArray
