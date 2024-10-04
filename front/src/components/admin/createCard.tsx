@@ -1,5 +1,5 @@
 import Drink from "./drink"
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useForm, useFieldArray } from "react-hook-form"
 import type { FieldValues } from "react-hook-form"
 import type{ FormValues, TypeSection, FormDrinksValues } from "../../types"
@@ -11,6 +11,8 @@ import '../../styles/createCard.css'
 
 function CreateCard():JSX.Element {
   const [description, setDescription] = useState<boolean>(false)
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setSectionId] = useState<string[]>([])
 
   // Controladores del formulario de bebidas
@@ -21,7 +23,7 @@ function CreateCard():JSX.Element {
   })
 
   // Configuración de las bebidas
-  const { fields: fieldsDrinks, append: appendDrinks, remove: removeDrinks } = useFieldArray({
+  const { fields: fieldsDrinks, append: appendDrinks } = useFieldArray({
     name: "drinks",
     control: controlDrinks
   })

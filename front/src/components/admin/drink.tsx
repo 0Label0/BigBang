@@ -1,5 +1,4 @@
 import type { TypeCreateDrink } from "../../types"
-import { useState } from "react"
 import '../../styles/createDrink.css'
 
 function Drink({ description, onDelete, index, register, id }:TypeCreateDrink):JSX.Element {
