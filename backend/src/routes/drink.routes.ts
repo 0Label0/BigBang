@@ -3,10 +3,10 @@ import *  as drinkController from '../controller/drink.controller'
 
 const r = Router()
 
-r.get('/sections/drinks', drinkController.getDrinks)
-r.get('/sections/drinks/:id', drinkController.getDrink)
-r.post('/sections/drinks', drinkController.createDrink)
-r.put('/sections/drinks/:id', drinkController.updateDrink)
-r.delete('/sections/drinks/:id', drinkController.deleteDrink)
+r.get('/drinks', drinkController.getDrinks)
+r.get('/drinks/:id', drinkController.getDrink)
+r.post('/drinks', drinkController.createDrink)
+r.put('/drinks/:id', drinkController.updateDrink)
+r.delete('/drinks/:id', drinkController.deleteDrink)
 
 export default r

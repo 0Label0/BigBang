@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express'
 import Drink from '../model/drink'
 
+
 // Crear bebida POST
 export const createDrink: RequestHandler = async (req, res) => {
   try {
@@ -31,7 +32,7 @@ export const getDrink: RequestHandler = async (req, res) => {
   try {
     const drinkFound = await Drink.findById(req.params.id)
     if(!drinkFound) {
-      return res.json(drinkFound)
+      return res.status(404).json({messageError: "bebida no encontrada"})
     }
     res.json(drinkFound)
   }catch (err) {
@@ -44,7 +45,7 @@ export const updateDrink: RequestHandler = async (req, res) => {
   try {
     const drinkFound = await Drink.findByIdAndUpdate(req.params.id, req.body, { new: true })
     if(!drinkFound) {
-      return res.json(drinkFound)
+      return res.status(404).json({ messageError : "bebida no encontrada" })
     }
     res.json(drinkFound)
   }catch (err) {
@@ -57,7 +58,7 @@ export const deleteDrink: RequestHandler = async (req, res) => {
   try {
     const deleteDrink = await Drink.findByIdAndDelete(req.params.id)
     if (!deleteDrink) {
-      return res.status(404).json(deleteDrink)
+      return res.status(404).json({messageError: "bebida no encontrada"})
     }
     res.json(deleteDrink)
   }catch (err) {

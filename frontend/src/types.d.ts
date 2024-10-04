@@ -1,7 +1,12 @@
+import type { UseFormRegister } from "react-hook-form"
+
+
 export interface TypeCreateDrink {
   description: boolean,
-  id: string,
-  onDelete: (id:string) => void
+  onDelete: (id:string) => void,
+  index: number,
+  register: UseFormRegister,
+  id: string
 }
 
 export interface TypeButtonBottom {
@@ -10,9 +15,13 @@ export interface TypeButtonBottom {
 }
 
 export type TypeDrink = {
-  id: string,
   description: boolean,
-  sectionId: string | undefined 
+  sectionId: string | undefined,
+  id: string
+}
+
+export interface FormDrinksValues {
+  drinks: TypeDrink[]
 }
 
 export type TypeSection = {
@@ -20,6 +29,7 @@ export type TypeSection = {
   _id?: string
 }
 
-interface FormValues {
+export interface FormValues {
   sections: TypeSection[]
 }
+

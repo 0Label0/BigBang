@@ -1,20 +1,20 @@
 ---
 interface Props {
-  drinkName: string,
-  drinkPrice: string | number,
-  drinkDescription?: string,
+  name: string,
+  price: string | number,
+  description?: string,
 }
 
-const { drinkName, drinkPrice, drinkDescription } = Astro.props
+const { name, price, description } = Astro.props
 ---
 
 <div class="drink">
   <div class="box reveal">
-    <p class="name">{drinkName}</p>
-    <p class="price">{drinkPrice}€</p>
+    <p class="name">{name}</p>
+    <p class="price">{price}€</p>
     
   </div>
-  <p class="description reveal">{drinkDescription}</p>
+  <p class="description reveal">{description}</p>
   
 </div>
 

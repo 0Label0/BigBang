@@ -2,11 +2,7 @@ import type { TypeCreateDrink } from "../../types"
 import { useState } from "react"
 import '../../styles/createDrink.css'
 
-function Drinks({ description, id, onDelete }:TypeCreateDrink):JSX.Element {
-
-  const [drinkName, setDrinkName] = useState<string>('')
-  const [price, setPrice] = useState<string>('')
-  const [descriptionInput, setDescriptionInput] = useState<string>('')
+function Drink({ description, onDelete, index, register, id }:TypeCreateDrink):JSX.Element {
 
   const removeItem = () :void => {
     onDelete(id)
@@ -16,11 +12,35 @@ function Drinks({ description, id, onDelete }:TypeCreateDrink):JSX.Element {
     <div className="drink-container">
       <div className="drink">
         <div className="box reveal">
-          <input type="text" className="name" placeholder="bebida" value={drinkName} onChange={(e)=>setDrinkName(e.target.value)}/>
-          <input type="number" className="price"  placeholder="0,00€" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+
+          <input
+            {...register(`drinks.${index}.name`)}
+            required
+            type="text"
+            className="name"
+            placeholder="bebida" 
+          />
+
+          <input
+            {...register(`drinks.${index}.price`)}
+            required 
+            type="text" 
+            className="price"  
+            placeholder="0.00€" 
+          />
+
         </div>
         {
-          description ? <input type="text" className="description" placeholder='descripción' value={descriptionInput} onChange={(e)=>setDescriptionInput(e.target.value)}/> : <div className="undescription"></div>
+          description ? 
+          <input 
+            {...register(`drinks.${index}.description`)}
+            type="text" 
+            className="description" 
+            placeholder='descripción' 
+
+          /> 
+          : 
+          <div className="undescription"></div>
         }
 
       </div>
@@ -30,4 +50,4 @@ function Drinks({ description, id, onDelete }:TypeCreateDrink):JSX.Element {
   )
 }
 
-export default Drinks
+export default Drink

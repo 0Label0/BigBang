@@ -3,7 +3,7 @@ import { Drink } from '../types'
 
 const dinkSchema: Schema = new Schema({
   name: {
-    type:String,
+    type: String,
     required: true,
     trim: true
   },
@@ -17,17 +17,10 @@ const dinkSchema: Schema = new Schema({
     trim: true
   },
   section_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'Section',
-    required: true
-  },
-  id: {
-    type: String,
-    required: true,
-    trim: true
+    required: false
   }
-}, {
-  timestamps: true
 })
 
 export default model<Drink>('Drink', dinkSchema)

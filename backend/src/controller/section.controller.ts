@@ -14,7 +14,7 @@ export const getSection: RequestHandler = async (req, res) => {
   try {
     const sectionFind = await Section.findById(req.params.id)
     if (!sectionFind) {
-      return res.status(409).json({ "Message" : "section not find" })
+      return res.status(404).json({ "Message" : "Sección no encontrada" })
     }
     res.json(sectionFind)
   }catch (err) {
@@ -41,7 +41,7 @@ export const updateSection: RequestHandler = async (req, res) => {
   try {
     const updateSection = await Section.findByIdAndUpdate(req.params.id, req.body, { new : true })
     if (!updateSection) {
-      res.status(404).json(updateSection)
+      res.status(404).json({ messageError: " Sección no encontrada "})
     }
     res.json(updateSection)
   }catch (err) {
@@ -53,7 +53,7 @@ export const deleteSection: RequestHandler = async (req, res) => {
   try {
     const deleteSection = await Section.findByIdAndDelete(req.params.id)
     if (!deleteSection) {
-      return res.status(404).json({ message: "Sección no encontrada" });
+      return res.status(404).json({ message: "Sección no encontrada" })
     }
     res.json(deleteSection)
   }catch(err) {

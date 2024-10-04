@@ -1,13 +1,13 @@
 
 @api =http://localhost:1234
-@drinks = /sections/drinks
+@drinks = /drinks
 
 ### DRINKS
 GET {{api}}{{drinks}}
 
 ###
 
-GET {{api}}{{drinks}}/66f3c7cc25c26bf9eca9b3c4
+GET {{api}}{{drinks}}/66fd76a57174c86a21945972
 
 ###
 
@@ -15,15 +15,15 @@ POST {{api}}{{drinks}}
 Content-Type: application/json
 
 {
-  "name": "Tercio",
+  "name": "tercio",
   "price":4.50,
   "description": "Esto es una bebida",
-  "section_id": "66f3ee3ccad48f27b193124b"
+  "section_id": "66fd8c594c289e29691af7ae"
 }
 
 ###
 
-DELETE {{api}}{{drinks}}/1
+DELETE {{api}}{{drinks}}/66fd734790c072076706bbea
 
 ###
 
@@ -40,11 +40,11 @@ GET {{api}}/sections
 
 ###
 
-PUT {{api}}/sections/66fd3c85c7be1c14d4666cbe
+PUT {{api}}/sections/66fd776deba6b2212e2c923a
 Content-Type: application/json
 
 {
-  "title": "aaaan"
+  "title": "aaaaan"
 }
 
 ###

@@ -1,8 +1,8 @@
-import Drinks from "./drink"
+import Drink from "./drink"
 import React, { useState, useEffect } from "react"
 import { useForm, useFieldArray } from "react-hook-form"
 import type { FieldValues } from "react-hook-form"
-import type { TypeDrink, FormValues, TypeSection } from "../../types"
+import type{ FormValues, TypeSection, FormDrinksValues } from "../../types"
 import createElemet from "../../api/createElement"
 import getAllData from "../../api/getAllData"
 import deleteData from "../../api/deleteData"
@@ -11,35 +11,50 @@ import '../../styles/createCard.css'
 
 function CreateCard():JSX.Element {
   const [description, setDescription] = useState<boolean>(false)
-  const [drinks, setDrinks] = useState<TypeDrink[]>([])
   const [_, setSectionId] = useState<string[]>([])
 
-  // Controladores del formulario
-  const { register, handleSubmit, control, reset } = useForm<FormValues>({
+  // Controladores del formulario de bebidas
+  const { register: registerDrinks, control: controlDrinks, reset: resetDrinks } = useForm<FormDrinksValues>({
+    defaultValues: {
+      drinks: []
+    }
+  })
+
+  // Configuración de las bebidas
+  const { fields: fieldsDrinks, append: appendDrinks, remove: removeDrinks } = useFieldArray({
+    name: "drinks",
+    control: controlDrinks
+  })
+
+  const addDrink = (sectionId: string | undefined, description: boolean): void => {
+    appendDrinks(
+      { description, sectionId, id:`${Date.now()}` }
+    )
+  }
+
+  const deleteDrink = (id:string): void => {
+    const updatedDrinks = fieldsDrinks.filter((drink) => drink.id !== id)
+    resetDrinks({drinks: updatedDrinks})
+  }
+
+  
+  /*----------------------------------------------------------------------*/
+
+  // Controladores del formulario de secciones
+  const { register: registerSections, handleSubmit: handleSubmitSections, control: controlSections, reset: resetSections } = useForm<FormValues>({
     defaultValues: {
       sections: []
     }
   })
 
-  // Configuración de useFieldArray
-  const { fields, append, remove } = useFieldArray({
+  // Configuración de las secciones
+  const { fields: fieldsSections, append: appendSections, remove: removeSections } = useFieldArray({
     name: "sections",
-    control
+    control: controlSections
   })
-  
-  const addDrink = (sectionId: string | undefined, description: boolean): void => {
-    setDrinks(
-      [...drinks, { id: `${Date.now()}`, description, sectionId }]
-    )
-  }
-
-  const deleteDrink = (id: string): void => {
-    const updateDrinks = drinks.filter((drink: TypeDrink)=>drink.id !== id) 
-    setDrinks(updateDrinks)
-  }
 
   const addSection = (): void => {
-    append({ title:"new-section" })
+    appendSections({ title:"new-section" })
   }
 
   useEffect(()=> {
@@ -48,19 +63,21 @@ function CreateCard():JSX.Element {
       if (savedSection) {
         const sectionIds = savedSection.map((section: TypeSection) => section._id) // Extraer IDs
         setSectionId(sectionIds)
-        reset({
+        resetSections({
           sections: savedSection
         })
       }
     })()
-  }, [reset])
+  }, [resetSections, resetDrinks])
 
   const handleDeleteSection = (sectionId: string | undefined, index: number ): void => {
     if (sectionId) {
       deleteData('sections', sectionId)
     }
-    remove(index)
+    removeSections(index)
   }
+
+  /*----------------------------------------------------------------------*/
 
   const onSubmitForm = async (data: FieldValues): Promise<void> => {
     const { sections } = data
@@ -80,32 +97,41 @@ function CreateCard():JSX.Element {
 
   return(
     <>
-      <form onSubmit={handleSubmit(onSubmitForm)} className="drinks-container">
+      <form onSubmit={handleSubmitSections(onSubmitForm)} className="drinks-container">
         <div>
           {
-            fields.map((section, index)=> {
+            fieldsSections.map((section, index)=> {
               return(
                 <section key={index} style={{marginBottom:"200px"}}>
                   <input
-                    {...register(`sections.${index}.title`)}
+                    {...registerSections(`sections.${index}.title`)}
+                    required
                     type="text"
                     style={{ fontSize: "2em", color: "#fff", textAlign: "center" }}
                     defaultValue={section.title}
                   />
                   <div className="btn-section-container">
-                    <button className="erase" type="button" onClick={()=>handleDeleteSection(section._id, index)}>Eliminar sección</button>
-                    <button className="btn-a" type="button" onClick={()=>addDrink(section._id, description)}>Añadir bebida</button>
-                    <button className="btn-c" type="button" onClick={()=> setDescription(!description)}>{description ? <span>Con descripción</span> : <span>Sin descripción</span>}</button>
+                    <button className="erase" type="button" onClick={() => handleDeleteSection(section._id, index)}>Eliminar sección</button>
+                    <button className="btn-a" type="button" onClick={() => addDrink(section._id, description)}>Añadir bebida</button>
+                    <button className="btn-c" type="button" onClick={() => setDescription(!description)}>{description ? <span>Con descripción</span> : <span>Sin descripción</span>}</button>
                   </div>
                   
                   <ul className="drinks">
                     {
-                    drinks
+                    fieldsDrinks
                       .filter((drink)=> section._id === drink.sectionId)
-                      .map((drink)=> {
+                      .map((drink, drinkIndex)=> {
                         return(
                           <li key={drink.id}>
-                              <Drinks onDelete={deleteDrink} id={(drink.id + '')} description={drink.description} />
+
+                              <Drink 
+                                onDelete={()=>deleteDrink(drink.id)}
+                                id={drink.id}
+                                description={drink.description}
+                                index={drinkIndex}
+                                register={registerDrinks}
+                              />
+
                           </li>
                         )
                       })
